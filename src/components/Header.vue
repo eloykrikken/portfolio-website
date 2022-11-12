@@ -2,15 +2,15 @@
     <div class="header-container">
         <img alt="logo" class="header-logo" src="../assets/images/logo.png" />
         <h1>Eloy Krikken</h1>
-        
+        <popup-menu 
+                :isIconButton="true"
+                faIcon="fa-solid fa-globe"
+                alignment="right"/>
         <div class="align-right">
             <div class="nav-button">
-                <button class="icon-button round-button">
-                    <font-awesome-icon 
-                        icon="fa-solid fa-globe" 
-                        size="2x" 
-                    />
-                </button>
+                <popup-menu 
+                :isIconButton="true"
+                faIcon="fa-solid fa-globe"/>
             </div>
             <div class="nav-button">
                 <button class="icon-button round-button">
@@ -22,7 +22,10 @@
 </template>
 
 <script lang="ts">
+import PopupMenu from './reusable/PopupMenu.vue';
+
 export default {
+  components: { PopupMenu },
     name: 'Header'
 }
 </script>
