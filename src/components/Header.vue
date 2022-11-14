@@ -2,15 +2,22 @@
     <div class="header-container">
         <img alt="logo" class="header-logo" src="../assets/images/logo.png" />
         <h1>Eloy Krikken</h1>
-        <popup-menu 
-                :isIconButton="true"
-                faIcon="fa-solid fa-globe"
-                alignment="right"/>
         <div class="align-right">
             <div class="nav-button">
                 <popup-menu 
-                :isIconButton="true"
-                faIcon="fa-solid fa-globe"/>
+                    :isIconButton="true"
+                    faIcon="fa-solid fa-globe"
+                    :options="[{
+                        label: 'TestOption1',
+                        value: 'test1',
+                        faIcon: 'fa-solid fa-globe'
+                    },
+                    {
+                        label: 'TestOption2',
+                        value: 'test2',
+                    }]"
+                    @menu-item-selected="log"
+                />
             </div>
             <div class="nav-button">
                 <button class="icon-button round-button">
@@ -25,8 +32,13 @@
 import PopupMenu from './reusable/PopupMenu.vue';
 
 export default {
-  components: { PopupMenu },
-    name: 'Header'
+    components: { PopupMenu },
+    name: 'Header',
+    methods: {
+        log(clicked: string) {
+            console.log(clicked);
+        }
+    }
 }
 </script>
 

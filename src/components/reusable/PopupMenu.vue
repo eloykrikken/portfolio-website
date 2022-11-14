@@ -10,18 +10,34 @@
             <span v-else>{{ displayText }}</span>
         </button>
         <div :class="determineAlignment">
-            <div class="menu-item">
+            <!-- <div class="menu-item">
                 <span>Placeholder Text</span>
             </div>
             <div class="menu-item">Placeholder Text</div>
-            <div class="menu-item">Placeholder Text</div>
+            <div class="menu-item">Placeholder Text</div> -->
+            <div class="menu-item" v-for="option in options" :key="option.value">
+                <img v-if="option.imgSrc" :src="iconImgSrc" :alt="option.label"/>
+                <font-awesome-icon 
+                    v-else-if="option.faIcon"
+                    :icon="option.faIcon"
+                    :size="!!option.faIconSize ? option.faIconSize : '1x'" 
+                />
+                <button @click="menuItemSelected(option.value)">{{ option.label }}</button>
+            </div>
         </div>
     </div>
 </template>
 <script lang="ts">
+import type { PropType } from '@vue/runtime-core';
+import type MenuOption from '../../assets/interfaces/menuOption';
+
 export default {
     name: 'PopupMenu',
     props: {
+        options: {
+            type: Array as PropType<Array<MenuOption>>,
+            required: true
+        },
         alignment: {
             type: String,
             default: 'left'
@@ -44,13 +60,17 @@ export default {
 
         displayText: String
     },
-
     computed: {
         determineAlignment(): String {
             if(this.alignment === 'left') {
                 return 'menu left'
             }
             return 'menu'
+        }
+    },
+    methods: {
+        menuItemSelected(itemValue: String) {
+            this.$emit('menu-item-selected', itemValue);
         }
     }
 }
