@@ -10,41 +10,38 @@
             <span v-else>{{ displayText }}</span>
         </button>
         <div :class="determineAlignment">
-            <!-- <div class="menu-item">
-                <span>Placeholder Text</span>
-            </div>
-            <div class="menu-item">Placeholder Text</div>
-            <div class="menu-item">Placeholder Text</div> -->
             <div class="menu-item" v-for="option in options" :key="option.value">
-                <img v-if="option.imgSrc" :src="iconImgSrc" :alt="option.label"/>
-                <font-awesome-icon 
-                    v-else-if="option.faIcon"
-                    :icon="option.faIcon"
-                    :size="!!option.faIconSize ? option.faIconSize : '1x'" 
-                />
-                <button @click="menuItemSelected(option.value)">{{ option.label }}</button>
+                <button @click="menuItemSelected(option.value)">
+                    <img v-if="option.imgSrc" :src="iconImgSrc" :alt="option.label"/>
+                    <font-awesome-icon 
+                        v-else-if="option.faIcon"
+                        :icon="option.faIcon"
+                        :size="!!option.faIconSize ? option.faIconSize : '1x'" 
+                    />
+                    <span>{{ option.label }}</span>
+                </button>
             </div>
         </div>
     </div>
 </template>
 <script lang="ts">
-import type { PropType } from '@vue/runtime-core';
-import type MenuOption from '../../assets/interfaces/menuOption';
+import type { PropType } from '@vue/runtime-core'
+import type MenuOption from '../../assets/interfaces/menuOption'
 
 export default {
     name: 'PopupMenu',
     props: {
         options: {
             type: Array as PropType<Array<MenuOption>>,
-            required: true
+            required: true,
         },
         alignment: {
             type: String,
-            default: 'left'
+            default: 'left',
         },
         isIconButton: {
             type: Boolean,
-            default: false
+            default: false,
         },
         isImgIcon: {
             type: Boolean,
@@ -55,50 +52,68 @@ export default {
         faIcon: String,
         faIconSize: {
             type: String,
-            default: '2x'
+            default: '2x',
         },
 
-        displayText: String
+        displayText: String,
     },
     computed: {
         determineAlignment(): String {
-            if(this.alignment === 'left') {
+            if (this.alignment === 'left') {
                 return 'menu left'
             }
             return 'menu'
-        }
+        },
     },
     methods: {
         menuItemSelected(itemValue: String) {
-            this.$emit('menu-item-selected', itemValue);
+            this.$emit('menu-item-selected', itemValue)
+        },
+    },
+}
+</script>
+<style scoped lang="scss">
+.menu {
+    position: absolute;
+
+    margin-top: 10px;
+
+    background-color: var(--background-secondary-color);
+    border-radius: 5px;
+    z-index: 1001;
+
+    &.left {
+        transform: translateX(-70%);
+
+        .menu-item {
+            height: 50px;
+
+            display: flex;
+
+            button {
+                width: 100%;
+                height: 100%;
+                align-items: center;
+                cursor: pointer;
+                display: flex;
+                background: none;
+                border: inherit;
+                color: inherit;
+                font-size: 20px;
+
+                img {
+                    margin-right: 10px;
+                }
+                svg {
+                    margin-right: 10px;
+                }
+
+                &:hover {
+                    background-color: var(--secondary-color);
+                    border-radius: 5px;
+                }
+            }
         }
     }
 }
-</script>
-<style scoped>
-    @import '../../assets/style.css';
-
-    .menu {
-        position: absolute;
-
-        margin-top: 10px;
-
-        background-color: var(--background-secondary-color);
-        border-radius: 5px;
-        z-index: 1001;
-
-    }
-
-    .menu.left {
-        transform: translateX(-80%);
-    }
-
-    .menu-item {
-        width: 200px;
-        height: 50px;
-        padding: 0 10px 0 10px;
-
-        display: flex;
-        align-items: center;
-    }
 </style>

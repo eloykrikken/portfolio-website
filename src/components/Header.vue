@@ -29,20 +29,20 @@
 </template>
 
 <script lang="ts">
-import PopupMenu from './reusable/PopupMenu.vue';
+import PopupMenu from './reusable/PopupMenu.vue'
 
 export default {
     components: { PopupMenu },
     name: 'Header',
     methods: {
         log(clicked: string) {
-            console.log(clicked);
-        }
-    }
+            console.log(clicked)
+        },
+    },
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .header-container {
     display: flex;
     align-items: center;

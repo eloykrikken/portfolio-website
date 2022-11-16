@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import Header from './components/Header.vue';
+import Header from './components/Header.vue'
 </script>
 
 <template>
@@ -12,7 +12,7 @@ import Header from './components/Header.vue';
   </div>
 </template>
 
-<style>
-  @import './assets/style.css';
-  @import '../node_modules/typeface-roboto/index.css';
+<style lang="scss">
+@import './styles/styles.scss';
+@import '../node_modules/typeface-roboto/index.css';
 </style>
