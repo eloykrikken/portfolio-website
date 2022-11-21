@@ -15,6 +15,11 @@
                     {
                         label: 'TestOption2',
                         value: 'test2',
+                    },
+                    {
+                        label: 'TestOption3',
+                        value: 'test3',
+                        imgSrc: 'src/assets/images/logo.png'
                     }]"
                     @menu-item-selected="log"
                 />
